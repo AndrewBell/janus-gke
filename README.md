@@ -20,6 +20,10 @@ Project Janus is an example of cloud native architecture. This repository demons
 
 This guide assumes a basic familiarity with GKE, and is largely based on the [Google Kubernetes Engine Quickstart](https://cloud.google.com/kubernetes-engine/docs/quickstart)
 
+You will need to have logged into your Google Cloud dashboard, and created a new project. The project ID is your project name, plus random numbers, and is globally unique. You will need this for the next step.
+
+If you have not authorized your local environment, also do so now with `gcloud auth login`
+
 ### Create a simple cluster
 
 #### Set Defaults
@@ -50,6 +54,16 @@ You are now ready to deploy applications to your GKE Cluster. See the other Janu
 #### Teardown
 
 `gcloud container clusters delete [CLUSTER-NAME]`
+
+## Scripting the cloud
+
+Included are two bash scripts used to create a Kubernetes cluster, and destroy it.
+
+examples:
+
+`sh ./deploy.sh -p k8-demo-12345 -c us-central1-a -n main-node`
+
+`sh ./destroy.sh -n main-node`
 
 # Contact Me
 
