@@ -22,10 +22,6 @@ This guide assumes a basic familiarity with GKE, and is largely based on the [Go
 
 You will need to have logged into your Google Cloud dashboard, and created a new project. Be sure to note the Project ID located under the Project Info card on your dashboard.
 
-The build scripts assume the above project ID is exported as such:
-
-`export GCP_PROJECT_ID="my-demo-12345"`
-
 Log into your local gcloud shell before you begin: `gcloud auth login`
 
 ### Create a simple cluster
@@ -63,11 +59,17 @@ You are now ready to deploy applications to your GKE Cluster. See the other Janu
 
 Included are two bash scripts used to create a Kubernetes cluster, and destroy it.
 
-examples:
+The build scripts assume the above project ID is exported as such:
 
-`sh ./deploy.sh -p k8-demo-12345 -c us-central1-a -n main-node`
+`export GCP_PROJECT_ID="my-demo-12345"`
 
-`sh ./destroy.sh -n main-node`
+Create a cluster:
+
+`sh ./deploy.sh cluster-node-name`
+
+Destroy a cluster:
+
+`sh ./destroy.sh cluster-node-name`
 
 # Contact Me
 
