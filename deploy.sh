@@ -1,46 +1,44 @@
 #!/bin/bash
 #
 # Create Janus infrastructure using Google Kubernetes Engine
+#
+# Setup:
+# `export GCP_PROJECT_ID=your_google_cloud_project_unique_id'`
+#
+# Run:
+# `sh ./deploy cluster-node-name`
+
+
 
 err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
 }
 
-project_id=''
-compute_region=''
+compute_zone='us-central1-a'
 node_name=''
+project_id=''
 
-while getopts 'p:c:n:' flag; do
-  case "${flag}" in
-    p) project_id="${OPTARG}" ;;
-    c) compute_region="${OPTARG}" ;;
-    n) node_name="${OPTARG}" ;;
-    *) error "Unexpected option ${flag}" ;;
-  esac
-done
-
-if [ -z "$project_id" ]; then
-  err "Please set a project name with the -p flag."
+if [ -z $GCP_PROJECT_ID ]; then
+  err "Please 'export GCP_PROJECT_ID=your_google_cloud_project_unique_id'"
   exit 1
 fi
 
-if [ -z "$compute_region" ]; then
-  err "Please set a compute region with the -c flag."
+project_id=$GCP_PROJECT_ID
+
+if [ -z $1 ]; then
+  err "Please pass a cluster node name as a parameter."
   exit 1
 fi
 
-if [ -z "$node_name" ]; then
-  err "Please set a node name with the -n flag."
-  exit 1
-fi
+node_name=$1
 
 if ! gcloud config set project "$project_id" ; then
   err "Could not set project ID to $project_id"
   exit 1
 fi
 
-if ! gcloud config set compute/zone "$compute_region" ; then
-  err "Could not set compute region to $compute_region"
+if ! gcloud config set compute/zone "$compute_zone" ; then
+  err "Could not set compute zone to $compute_zone"
   exit 1
 fi
 

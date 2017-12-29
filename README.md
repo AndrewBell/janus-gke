@@ -20,9 +20,13 @@ Project Janus is an example of cloud native architecture. This repository demons
 
 This guide assumes a basic familiarity with GKE, and is largely based on the [Google Kubernetes Engine Quickstart](https://cloud.google.com/kubernetes-engine/docs/quickstart)
 
-You will need to have logged into your Google Cloud dashboard, and created a new project. The project ID is your project name, plus random numbers, and is globally unique. You will need this for the next step.
+You will need to have logged into your Google Cloud dashboard, and created a new project. Be sure to note the Project ID located under the Project Info card on your dashboard.
 
-If you have not authorized your local environment, also do so now with `gcloud auth login`
+The build scripts assume the above project ID is exported as such:
+
+`export GCP_PROJECT_ID="my-demo-12345"`
+
+Log into your local gcloud shell before you begin: `gcloud auth login`
 
 ### Create a simple cluster
 
